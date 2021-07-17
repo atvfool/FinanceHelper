@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FinanceHelper.Models.AmortizationEntryModel>
+
+@{
+    ViewData["Title"] = "Amortization";
+    Layout = "~/Views/Shared/_LayoutAuthorized.cshtml";
+}
+
+<h1>Amortization</h1>
+
+<p>
+    Name: @Model.First().AccountName |
+    Total Interest Paid: @Model.Sum(x => x.InterestPaid).ToString("$#,###.00") | 
+    Total Payments: @Model.Count()
+
+</p>
+<div class="table-responsive" style="height:500px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AmountRemaining)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Payment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InterestPaid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExtraPayment)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountRemaining)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InterestPaid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExtraPayment)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.ActionLink("Back To Account", "Details", new { id = Model.First().AccountID }) | @Html.ActionLink("Back To List", "Index")

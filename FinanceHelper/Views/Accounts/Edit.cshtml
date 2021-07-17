@@ -1,0 +1,56 @@
+﻿@model FinanceHelper.Models.AccountsModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAuthorized.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Accounts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AccountID" />
+            <div class="form-group">
+                <label asp-for="AccountName" class="control-label"></label>
+                <input asp-for="AccountName" class="form-control" />
+                <span asp-validation-for="AccountName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartingBalance" class="control-label"></label>
+                <input asp-for="StartingBalance" class="form-control" />
+                <span asp-validation-for="StartingBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InterestRate" class="control-label"></label>
+                <input asp-for="InterestRate" class="form-control" />
+                <span asp-validation-for="InterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimumPayment" class="control-label"></label>
+                <input asp-for="MinimumPayment" class="form-control" />
+                <span asp-validation-for="MinimumPayment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayOfMonth" class="control-label"></label>
+                <input asp-for="DayOfMonth" class="form-control" />
+                <span asp-validation-for="DayOfMonth" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="UserID" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

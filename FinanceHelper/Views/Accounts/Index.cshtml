@@ -1,0 +1,45 @@
+﻿@model List<AccountsModel>
+@{
+    Layout = "_LayoutAuthorized";
+    ViewData["Title"] = "Accounts";
+}
+<h1>This is an authorized page</h1>
+
+<a class="btn btn-primary" asp-area="" asp-controller="Accounts" asp-action="Create">Create</a>
+<h3>Quick Stats</h3>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Total Debt: @Model.Sum(x => x.StartingBalance).ToString("$#,###.00")</li>
+    <li class="list-group-item">Total Monthly Minimum Payment: @Model.Sum(x => x.MinimumPayment).ToString("$#,###.00")</li>
+    <li class="list-group-item">Total Interest Accrued Monthly: @Model.Sum(x => (x.StartingBalance * x.InterestRate / 12)).ToString("$#,###.00")</li>
+</ul>
+<br />
+<h3>Accounts</h3>
+<div class="table-responsive" style="height:500px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Interest Rate</th>
+                <th>Minimum Payment</th>
+                <th>Day Of The Month</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (AccountsModel account in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => account.AccountName)</td>
+                    <td>@Html.DisplayFor(model => account.StartingBalance)</td>
+                    <td>@Html.DisplayFor(model => account.InterestRate)</td>
+                    <td>@Html.DisplayFor(model => account.MinimumPayment)</td>
+                    <td>@Html.DisplayFor(model => account.DayOfMonth)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = account.AccountID })</td>
+                    <td>@Html.ActionLink("Details", "Details", new { id = account.AccountID })</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
